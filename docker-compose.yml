@@ -1,0 +1,19 @@
+services:
+  jupyter-dock:
+    image: python:latest
+    container_name: jupyter-dock
+    volumes:
+      - ./data:/home/app
+    ports:
+      - "8888:8888"
+    command: >
+      bash -c "apt update && apt upgrade -y &&
+      apt install geoip-bin -y &&
+      apt install geoip-database -y &&
+      pip install numpy pandas plotly jupyterlab notebook &&
+      pip install tensorflow &&
+      pip install matplotlib &&
+      pip install seaborn &&
+      jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root -NotebookApp.token='' --NotebookApp.password=''
+      "
+
